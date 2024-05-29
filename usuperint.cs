@@ -19,6 +19,89 @@ namespace SharpNumbers {
             index_list = temp_list;
         }
 
+        public usuperint(long num) {
+            string string_number = num.ToString();
+            List<byte> temp_list = new List<byte>();
+
+            foreach (byte character in string_number) {
+                byte temp_character = (byte)(character - '0');
+                temp_list.Add(temp_character);
+            }
+            temp_list.Reverse();
+            index_list = temp_list;
+        }
+
+        public usuperint(uint num) {
+            string string_number = num.ToString();
+            List<byte> temp_list = new List<byte>();
+
+            foreach (byte character in string_number) {
+                byte temp_character = (byte)(character - '0');
+                temp_list.Add(temp_character);
+            }
+            temp_list.Reverse();
+            index_list = temp_list;
+        }
+        public usuperint(int num) {
+            string string_number = num.ToString();
+            List<byte> temp_list = new List<byte>();
+
+            foreach (byte character in string_number) {
+                byte temp_character = (byte)(character - '0');
+                temp_list.Add(temp_character);
+            }
+            temp_list.Reverse();
+            index_list = temp_list;
+        }
+
+        public usuperint(ushort num) {
+            string string_number = num.ToString();
+            List<byte> temp_list = new List<byte>();
+
+            foreach (byte character in string_number) {
+                byte temp_character = (byte)(character - '0');
+                temp_list.Add(temp_character);
+            }
+            temp_list.Reverse();
+            index_list = temp_list;
+        }
+
+        public usuperint(short num) {
+            string string_number = num.ToString();
+            List<byte> temp_list = new List<byte>();
+
+            foreach (byte character in string_number) {
+                byte temp_character = (byte)(character - '0');
+                temp_list.Add(temp_character);
+            }
+            temp_list.Reverse();
+            index_list = temp_list;
+        }
+
+        public usuperint(byte num) {
+            string string_number = num.ToString();
+            List<byte> temp_list = new List<byte>();
+
+            foreach (byte character in string_number) {
+                byte temp_character = (byte)(character - '0');
+                temp_list.Add(temp_character);
+            }
+            temp_list.Reverse();
+            index_list = temp_list;
+        }
+
+        public usuperint(sbyte num) {
+            string string_number = num.ToString();
+            List<byte> temp_list = new List<byte>();
+
+            foreach (byte character in string_number) {
+                byte temp_character = (byte)(character - '0');
+                temp_list.Add(temp_character);
+            }
+            temp_list.Reverse();
+            index_list = temp_list;
+        }
+
         public usuperint add(usuperint input) {
             List<byte> list = new List<byte>(); // List which will hold all edits
 
