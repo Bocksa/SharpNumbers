@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            usuperint foo = new usuperint(487226);
-            usuperint bar = new usuperint(100000);
+            usuperint foo = new usuperint((ulong)(2000000000000));
+            usuperint bar = new usuperint((ulong)(2000000000000));
+
             foo = foo.subtract(bar);
+
+            Console.WriteLine(foo.ToString());
             Console.ReadKey();
         }
     }
