@@ -118,8 +118,10 @@ namespace SharpNumbers {
         private List<byte> roundUp(int i, List<byte> list) {
             try {
                 sortForOutOfIndexRange(list, i + 1);
+
                 byte temp_upper = (byte)(list[i + 1] + Math.DivRem((int)list[i], 10, out int result));
                 swapListElement(list, i + 1, temp_upper);
+
                 byte temp_lower = (byte)(list[i] % 10);
                 swapListElement(list, i, temp_lower);
             } catch (Exception e) {
