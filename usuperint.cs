@@ -53,6 +53,13 @@ namespace SharpNumbers {
             output.index_list = list;
             return output;
         }
+        public usuperint mult(usuperint input) {
+            List<byte> list = new List<byte>();
+
+            usuperint output = new usuperint();
+            output.index_list = list;
+            return output;
+        }
         private usuperint() {
             // :]
         }
