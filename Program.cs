@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            usuperint foo = new usuperint(99);
-            usuperint bar = new usuperint(99);
+            usuperint foo = new usuperint(9999999999999999999);
+            usuperint bar = new usuperint(9999999999999999999);
 
             foo = foo.add(bar);
 
