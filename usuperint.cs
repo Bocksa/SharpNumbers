@@ -8,98 +8,34 @@ namespace SharpNumbers {
     class usuperint {
         List<byte> index_list; // Stores the position of a number in terms of scientific notation (i*10^n)
         public usuperint(ulong num) {
-            string string_number = num.ToString();
-            List<byte> temp_list = new List<byte>();
-
-            foreach (byte character in string_number) {
-                byte temp_character = (byte)(character - '0');
-                temp_list.Add(temp_character);
-            }
-            temp_list.Reverse();
-            index_list = temp_list;
+            index_list = initialize<ulong>(num);
         }
 
         public usuperint(long num) {
-            string string_number = num.ToString();
-            List<byte> temp_list = new List<byte>();
-
-            foreach (byte character in string_number) {
-                byte temp_character = (byte)(character - '0');
-                temp_list.Add(temp_character);
-            }
-            temp_list.Reverse();
-            index_list = temp_list;
+            index_list = initialize<long>(num);
         }
 
         public usuperint(uint num) {
-            string string_number = num.ToString();
-            List<byte> temp_list = new List<byte>();
-
-            foreach (byte character in string_number) {
-                byte temp_character = (byte)(character - '0');
-                temp_list.Add(temp_character);
-            }
-            temp_list.Reverse();
-            index_list = temp_list;
+            index_list = initialize<uint>(num);
         }
         public usuperint(int num) {
-            string string_number = num.ToString();
-            List<byte> temp_list = new List<byte>();
-
-            foreach (byte character in string_number) {
-                byte temp_character = (byte)(character - '0');
-                temp_list.Add(temp_character);
-            }
-            temp_list.Reverse();
-            index_list = temp_list;
+            index_list = initialize<int>(num);
         }
 
         public usuperint(ushort num) {
-            string string_number = num.ToString();
-            List<byte> temp_list = new List<byte>();
-
-            foreach (byte character in string_number) {
-                byte temp_character = (byte)(character - '0');
-                temp_list.Add(temp_character);
-            }
-            temp_list.Reverse();
-            index_list = temp_list;
+            index_list = initialize<ushort>(num);
         }
 
         public usuperint(short num) {
-            string string_number = num.ToString();
-            List<byte> temp_list = new List<byte>();
-
-            foreach (byte character in string_number) {
-                byte temp_character = (byte)(character - '0');
-                temp_list.Add(temp_character);
-            }
-            temp_list.Reverse();
-            index_list = temp_list;
+            index_list = initialize<short>(num);
         }
 
         public usuperint(byte num) {
-            string string_number = num.ToString();
-            List<byte> temp_list = new List<byte>();
-
-            foreach (byte character in string_number) {
-                byte temp_character = (byte)(character - '0');
-                temp_list.Add(temp_character);
-            }
-            temp_list.Reverse();
-            index_list = temp_list;
+            index_list = initialize<byte>(num);
         }
 
         public usuperint(sbyte num) {
-            string string_number = num.ToString();
-            List<byte> temp_list = new List<byte>();
-
-            foreach (byte character in string_number) {
-                byte temp_character = (byte)(character - '0');
-                temp_list.Add(temp_character);
-            }
-            temp_list.Reverse();
-            index_list = temp_list;
+            index_list = initialize<sbyte>(num);
         }
 
         public usuperint add(usuperint input) {
@@ -120,6 +56,7 @@ namespace SharpNumbers {
             output.index_list = list;
             return output;
         }
+
         public usuperint subtract(usuperint input) {
             List<byte> list = new List<byte>(); // List which will hold all edits
 
@@ -167,9 +104,23 @@ namespace SharpNumbers {
 
             return output;
         }
+
         private usuperint() {
             // :]
         }
+
+        private static List<byte> initialize<T>(T num) {
+            string string_number = num.ToString();
+            List<byte> temp_list = new List<byte>();
+
+            foreach (byte character in string_number) {
+                byte temp_character = (byte)(character - '0');
+                temp_list.Add(temp_character);
+            }
+            temp_list.Reverse();
+            return temp_list;
+        }
+
         private List<byte> incrementList(List<byte> list, int i, usuperint input) {
             input.sortForOutOfIndexRange(i);
             this.sortForOutOfIndexRange(i);
@@ -222,6 +173,7 @@ namespace SharpNumbers {
             }
             return list;
         }
+
         private int getSignificantFigures() {
             for (int i = index_list.Count - 1; i >= 0; i--) {
                 if (index_list[i] != 0) {
@@ -231,16 +183,19 @@ namespace SharpNumbers {
             }
             return 0;
         }
+
         private void sortForOutOfIndexRange(int i) {
             if (index_list.Count <= i) {
                 index_list.Add((byte)(0));
             }
         }
+
         private static void sortForOutOfIndexRange(List<byte> list, int i) {
             if (list.Count <= i) {
                 list.Add((byte)(0));
             }
         }
+
         private static void swapListElement(List<byte> list, int i, byte value) {
             list.RemoveAt(i);
             list.Insert(i, value);
