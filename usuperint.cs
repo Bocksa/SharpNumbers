@@ -26,7 +26,8 @@ namespace SharpNumbers {
                 for (int i = 0; i < input.index_list.Count; i++) {
                     list = incrementList(list, i, input);
                 }
-            } else {
+            }
+            else {
                 for (int i = 0; i < index_list.Count; i++) {
                     list = incrementList(list, i, input);
                 }
@@ -54,6 +55,7 @@ namespace SharpNumbers {
             output.index_list = list;
             return output;
         }
+
         public usuperint mult(usuperint input) {
             List<byte> list = new List<byte>();
 
@@ -67,7 +69,8 @@ namespace SharpNumbers {
 
             if (sigFigs < index_list.Count && sigFigs != 0) {
                 index_list.RemoveRange(sigFigs - 1, index_list.Count - sigFigs);
-            } else if (sigFigs == 0) {
+            }
+            else if (sigFigs == 0) {
                 index_list.Insert(0, 0);
                 index_list.RemoveRange(1, index_list.Count - 1);
             }
@@ -85,23 +88,25 @@ namespace SharpNumbers {
             // :]
         }
         private List<byte> incrementList(List<byte> list, int i, usuperint input) {
-            if (input.index_list.Count <= i) {
-                input.index_list.Add((byte)(0));
-            }
-            if (index_list.Count <= i) {
-                index_list.Add((byte)(0));
-            }
-            byte v = input.index_list[i];
-            byte u = index_list[i];
+            input.sortForOutOfIndexRange(i);
+            this.sortForOutOfIndexRange(i);
+            sortForOutOfIndexRange(list, i);
 
-            list.Insert(i, ((byte)(input.index_list[i] + index_list[i])));
+            byte temp_select = (byte)(input.index_list[i] + index_list[i] + list[i]);
+            swapListElement(list, i, temp_select);
+
             if (list[i] > 9) {
                 return roundUp(i, list);
-            } else {
+            }
+            else {
                 return list;
             }
         }
         private List<byte> decrementList(List<byte> list, int i, usuperint input) {
+            input.sortForOutOfIndexRange(i);
+            this.sortForOutOfIndexRange(i);
+            sortForOutOfIndexRange(list, i);
+
             int value = index_list[i] - input.index_list[i];
             if (value < 0) {
                 list.Insert(i, 0);
@@ -112,10 +117,13 @@ namespace SharpNumbers {
         }
         private List<byte> roundUp(int i, List<byte> list) {
             try {
-                list.Insert(i + 1, (byte)Math.DivRem((int)list[i], 10, out int result));
-                list.Insert(i, (byte)(list[i] % 10));
+                sortForOutOfIndexRange(list, i + 1);
+                byte temp_upper = (byte)(list[i + 1] + Math.DivRem((int)list[i], 10, out int result));
+                swapListElement(list, i + 1, temp_upper);
+                byte temp_lower = (byte)(list[i] % 10);
+                swapListElement(list, i, temp_lower);
             } catch (Exception e) {
-
+                Console.WriteLine(e.ToString());
             }
             return list;
         }
@@ -123,18 +131,34 @@ namespace SharpNumbers {
             try {
                 value = 10 + value;
 
-            } catch (Exception e) {
-
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.ToString());
             }
             return list;
         }
         private int getSignificantFigures() {
             for (int i = index_list.Count - 1; i >= 0; i--) {
-                if (index_list[i] != 0) { 
-                    return i + 1; 
+                if (index_list[i] != 0) {
+                    return i + 1;
                 }
+
             }
             return 0;
+        }
+        private void sortForOutOfIndexRange(int i) {
+            if (index_list.Count <= i) {
+                index_list.Add((byte)(0));
+            }
+        }
+        private static void sortForOutOfIndexRange(List<byte> list, int i) {
+            if (list.Count <= i) {
+                list.Add((byte)(0));
+            }
+        }
+        private static void swapListElement(List<byte> list, int i, byte value) {
+            list.RemoveAt(i);
+            list.Insert(i, value);
         }
     }
 }
