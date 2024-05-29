@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SharpNumbers {
     class usuperint {
+        // PROPERTIES \\
         List<byte> index_list; // Stores the position of a number in terms of scientific notation (i*10^n)
+
+        // INITIALISERS \\
         public usuperint(ulong num) {
             index_list = initialize<ulong>(num);
         }
@@ -37,6 +40,12 @@ namespace SharpNumbers {
         public usuperint(sbyte num) {
             index_list = initialize<sbyte>(num);
         }
+
+        private usuperint() {
+            // :]
+        }
+
+        // PUBLIC METHODS \\
 
         public usuperint add(usuperint input) {
             List<byte> list = new List<byte>(); // List which will hold all edits
@@ -105,9 +114,7 @@ namespace SharpNumbers {
             return output;
         }
 
-        private usuperint() {
-            // :]
-        }
+        // PRIVATE METHODS \\
 
         private static List<byte> initialize<T>(T num) {
             string string_number = num.ToString();
