@@ -22,12 +22,20 @@ namespace SharpNumbers {
         public usuperint Add(usuperint n2) {
             usuperint temp = new usuperint();
             if (split_number.Count > n2.split_number.Count) {
-                for (int i = 0; i < n2.split_number.Count; i++) {
-                    temp.split_number.Add(n2.split_number[i] + split_number[i]);
+                for (int i = 0; i < split_number.Count; i++) {
+                    if (i < n2.split_number.Count) {
+                        temp.split_number.Add(n2.split_number[i] + split_number[i]);
+                    } else {
+                        temp.split_number.Add(split_number[i]);
+                    }
                 }
             } else {
-                for (int i = 0; i < split_number.Count; i++) {
-                    temp.split_number.Add(n2.split_number[i] + split_number[i]);
+                for (int i = 0; i < n2.split_number.Count; i++) {
+                    if (i < split_number.Count) {
+                        temp.split_number.Add(n2.split_number[i] + split_number[i]);
+                    } else {
+                        temp.split_number.Add(n2.split_number[i]);
+                    }
                 }
             }
 

@@ -14,8 +14,9 @@ namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
             usuperint foo = new usuperint("400");
+            usuperint bar = new usuperint(69);
 
-            //foo = foo.Subtract(bar);
+            foo = foo.Add(bar);
 
             Console.WriteLine(foo.ToString());
             Console.ReadKey();
