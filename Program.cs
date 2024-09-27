@@ -4,13 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/* 
+ * Created by Cian McNamara, 2024.
+ * This file is to test the different super number classes.
+ * 
+ */
+
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            usuperint foo = new usuperint(9999999999999999999);
-            usuperint bar = new usuperint(9999999999999999999);
+            usuperint foo = new usuperint("400");
 
-            foo = foo.add(bar);
+            //foo = foo.Subtract(bar);
 
             Console.WriteLine(foo.ToString());
             Console.ReadKey();
