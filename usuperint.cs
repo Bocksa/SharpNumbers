@@ -19,6 +19,12 @@ namespace SharpNumbers {
              * This is purely used for creating temporary usuperints for math operations.
              */
         }
+
+        /// <summary>
+        /// Loops through every index of both numbers and adds the two corresponding index's together.
+        /// </summary>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public usuperint Add(usuperint n2) {
             usuperint temp = new usuperint();
             if (split_number.Count > n2.split_number.Count) {
@@ -44,10 +50,13 @@ namespace SharpNumbers {
             return temp;
         }
 
+        /// <summary>
+        /// Loops through a string from last to first character and inserts the characters as integers into a list.
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         private List<int> ConvertFromStringToIndexOrderList(string number) {
-            /*
-             * Loops through a string from last to first character and inserts the characters as integers into a list.
-             */
+
             List<int> temporaryList = new List<int>();
             for (int i = number.Length - 1; i >= 0; i--) {
                 temporaryList.Add(int.Parse(number[i].ToString()));
