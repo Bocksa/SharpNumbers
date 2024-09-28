@@ -114,6 +114,9 @@ namespace SharpNumbers {
             if (!IsFormattedCorrectly()) {
                 Clean();
             }
+            if (HasLeadingZeros()) {
+                RemoveLeadingZeros();
+            }
         }
 
         /// <summary>
@@ -167,6 +170,17 @@ namespace SharpNumbers {
                 return true;
             } else {
                 return false;
+            }
+        }
+        
+
+        private void RemoveLeadingZeros() {
+            for (int i = split_number.Count - 1; i >= 0 ; i--) {
+                if (split_number[i] == 0) {
+                    split_number.RemoveAt(i);
+                } else {
+                    break;
+                }
             }
         }
     }
