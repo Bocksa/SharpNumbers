@@ -53,9 +53,11 @@ namespace SharpNumbers {
 
             char[] charArray = tempString.ToCharArray();
             string output = string.Empty;
+
             for (int i = charArray.Length - 1; i > -1; i--) {
-                output += charArray[i];
+                output = output + charArray[i];
             }
+
             return output;
         }
 
@@ -122,10 +124,11 @@ namespace SharpNumbers {
         /// <param name="number"></param>
         /// <returns></returns>
         private List<int> ConvertFromStringToIndexOrderList(string number) {
-            List<int> temporaryList = new List<int>();
+            var temporaryList = new List<int>();
             for (int i = number.Length - 1; i >= 0; i--) {
                 temporaryList.Add(int.Parse(number[i].ToString()));
             }
+
             return temporaryList;
         }
         
@@ -188,6 +191,7 @@ namespace SharpNumbers {
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -231,6 +235,7 @@ namespace SharpNumbers {
             } else if (input.split_number.Count  > split_number.Count) {
                 return false;
             }
+
             return true;
         }
     }
