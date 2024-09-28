@@ -216,6 +216,11 @@ namespace SharpNumbers {
             }
         }
 
+        /// <summary>
+        /// Checks if the input usuperint is greater than the current usuperint.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private bool IsInputValidForSubtraction(usuperint input) {
             if (input.split_number.Count == split_number.Count) {
                 for (int i = split_number.Count - 1; i >= 0 ; i--) {
