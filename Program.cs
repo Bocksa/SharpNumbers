@@ -13,8 +13,8 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            usuperint foo = new usuperint("400");
-            usuperint bar = new usuperint(69);
+            usuperint foo = new usuperint(699);
+            usuperint bar = new usuperint(420);
 
             foo = foo.Add(bar);
 

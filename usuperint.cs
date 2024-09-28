@@ -63,12 +63,46 @@ namespace SharpNumbers {
             }
             return temporaryList;
         }
-        /* 
-         * Before writing this only god knew the horrors that would come from this.
-         * Soon only god will know the journey I went on by writing this.
-         */
+        
+        /// <summary>
+        /// Puts split_number in the correct format if it is out of format.
+        /// </summary>
         private void Clean() {
+            for (int i = 0; i < split_number.Count  ; i++) {
+                int currentEntry = split_number[i];
+                if (currentEntry < 0) {
+                    int lowerEntry = split_number[i - 1];
+                    int subNumber = 10 - currentEntry;
+                    split_number[i] = 0;
+                    split_number[i - 1] = lowerEntry - subNumber;
+                } else if (currentEntry > 9) {
+                    int upperNumber = currentEntry / 10;
+                    if (split_number.Count - 1 > i) {
+                        int upperEntry = split_number[i + 1];
+                        split_number[i] = currentEntry % 10;
+                        split_number[i + 1] = upperEntry + upperNumber;
+                    } else {
+                        split_number[i] = currentEntry % 10;
+                        split_number.Add(upperNumber);
+                    }
+                }
+            }
+            if (!IsFormattedCorrectly()) {
+                Clean();
+            }
+        }
 
+        /// <summary>
+        /// Checks if the formatting is correct on split_number.
+        /// </summary>
+        /// <returns></returns>
+        private bool IsFormattedCorrectly() {
+            for (int i = 0; i < split_number.Count ; i++) {
+                if (split_number[i] > 9 || split_number[i] < 0) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
