@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SharpNumbers {
     class usuperint {
@@ -60,6 +61,25 @@ namespace SharpNumbers {
             temp.Clean();
 
             return temp;
+        }
+
+        /// <summary>
+        /// Returns a string that represents a usuperint.
+        /// </summary>
+        /// <returns></returns>
+        public string ToString() {
+            string tempString = string.Empty;
+
+            for (int i = 0; i < split_number.Count; i++) {
+                tempString = $"{tempString}{split_number[i]}";
+            }
+
+            char[] charArray = tempString.ToCharArray();
+            string output = string.Empty;
+            for (int i = charArray.Length - 1; i > -1; i--) {
+                output += charArray[i];
+            }
+            return output;
         }
 
         /// <summary>
