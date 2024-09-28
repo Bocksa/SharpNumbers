@@ -74,6 +74,10 @@ namespace SharpNumbers {
         public string ToString() {
             string tempString = string.Empty;
 
+            if (HasLeadingZeros()) {
+                RemoveLeadingZeros();
+            }
+
             for (int i = 0; i < split_number.Count; i++) {
                 tempString = $"{tempString}{split_number[i]}";
             }
@@ -173,7 +177,9 @@ namespace SharpNumbers {
             }
         }
         
-
+        /// <summary>
+        /// Removes the leading zeros in split_number.
+        /// </summary>
         private void RemoveLeadingZeros() {
             for (int i = split_number.Count - 1; i >= 0 ; i--) {
                 if (split_number[i] == 0) {
