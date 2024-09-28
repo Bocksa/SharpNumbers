@@ -12,8 +12,12 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            usuperint foo = new usuperint(699);
-            usuperint bar = new usuperint(420);
+            usuperint foo = new usuperint("9999999999999999999999999999999");
+            usuperint bar = new usuperint("9999999999999999999999999999");
+
+            /* 
+             *  Test Cases are located below. (who needs proper unit testing anyway)
+             */
 
             foo.Add(bar);
             foo.Sub(bar);

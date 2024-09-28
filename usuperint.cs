@@ -104,7 +104,11 @@ namespace SharpNumbers {
             }
             
             for (int i = 0; i < split_number.Count; i++) {
-                temp.split_number.Add(split_number[i] - n2.split_number[i]);
+                if (i < n2.split_number.Count) {
+                    temp.split_number.Add(split_number[i] - n2.split_number[i]);
+                } else {
+                    temp.split_number.Add(split_number[i]);
+                }
             }
 
             temp.Clean();
