@@ -62,7 +62,7 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Loops through every index of both numbers and adds the two corresponding index's together.
+        /// Adds two usuperints together.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
@@ -93,7 +93,7 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Loops through every index of both numbers and subtracts the two corresponding index's.
+        /// Subtracts two usuperints from eachother.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
@@ -118,8 +118,39 @@ namespace SharpNumbers {
             return temp;
         }
 
+
         public usuperint Mult(usuperint n2) {
             usuperint temp = new usuperint();
+
+            if (split_number.Count >= n2.split_number.Count) {
+                for (int offset = 0; offset < split_number.Count; offset++) {
+                    usuperint subtemp = new usuperint();
+                    subtemp.split_number.DefaultIfEmpty(0);
+
+                    for (int i = 0; i < n2.split_number.Count; i++) {
+                        int selection_a = split_number[offset];
+                        int selection_b = n2.split_number[i];
+                        subtemp.InsertAtLocation(i + offset, selection_a * selection_b);
+                    }
+
+                    subtemp.Clean();
+                    temp = temp.Add(subtemp);
+                }
+            } else {
+                for (int offset = 0; offset < n2.split_number.Count; offset++) {
+                    usuperint subtemp = new usuperint();
+                    subtemp.split_number.DefaultIfEmpty(0);
+
+                    for (int i = 0; i < split_number.Count; i++) {
+                        int selection_a = n2.split_number[offset];
+                        int selection_b = split_number[i];
+                        subtemp.InsertAtLocation(i + offset, selection_a * selection_b);
+                    }
+
+                    subtemp.Clean();
+                    temp = temp.Add(subtemp);
+                }
+            }
 
             temp.Clean();
 
@@ -152,20 +183,22 @@ namespace SharpNumbers {
         /// Puts split_number in the correct format if it is out of format.
         /// </summary>
         private void Clean() {
-            for (int i = 0; i < split_number.Count  ; i++) {
-                int currentEntry = split_number[i];
-                if (currentEntry < 0) {
-                    BorrowFromHigherIndex(currentEntry, i);
-                } else if (currentEntry > 9) {
-                    PassToHigherIndex(currentEntry, i);
+            if (split_number.Count != 0) {
+                for (int i = 0; i < split_number.Count; i++) {
+                    int currentEntry = split_number[i];
+                    if (currentEntry < 0) {
+                        BorrowFromHigherIndex(currentEntry, i);
+                    } else if (currentEntry > 9) {
+                        PassToHigherIndex(currentEntry, i);
+                    }
                 }
-            }
-            if (!IsFormattedCorrectly()) {
-                Clean();
-            }
-            if (HasLeadingZeros()) {
-                RemoveLeadingZeros();
-            }
+                if (!IsFormattedCorrectly()) {
+                    Clean();
+                }
+                if (HasLeadingZeros()) {
+                    RemoveLeadingZeros();
+                }
+            } 
         }
 
         /// <summary>
@@ -251,6 +284,22 @@ namespace SharpNumbers {
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Inserts a given input to a potentially out of range location in a list.
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="input"></param>
+        private void InsertAtLocation(int location, int input) {
+            if (split_number.Count <= location) {
+                for (int i = split_number.Count; i < location ; i++) {
+                    split_number.Add(0);
+                }
+                split_number.Add(input);
+            } else {
+                split_number[location] = input;
+            }
         }
     }
 }
