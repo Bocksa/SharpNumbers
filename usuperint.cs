@@ -37,6 +37,29 @@ namespace SharpNumbers {
         }
 
         /// <summary>
+        /// Converts the numeric value of this instance to its equivalent string representation.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() {
+            string tempString = string.Empty;
+
+            if (HasLeadingZeros()) {
+                RemoveLeadingZeros();
+            }
+
+            for (int i = 0; i < split_number.Count; i++) {
+                tempString = $"{tempString}{split_number[i]}";
+            }
+
+            char[] charArray = tempString.ToCharArray();
+            string output = string.Empty;
+            for (int i = charArray.Length - 1; i > -1; i--) {
+                output += charArray[i];
+            }
+            return output;
+        }
+
+        /// <summary>
         /// Loops through every index of both numbers and adds the two corresponding index's together.
         /// </summary>
         /// <param name="n2"></param>
@@ -67,27 +90,20 @@ namespace SharpNumbers {
             return temp;
         }
 
-        /// <summary>
-        /// Converts the numeric value of this instance to its equivalent string representation.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() {
-            string tempString = string.Empty;
+        public usuperint Sub(usuperint n2) {
+            usuperint temp = new usuperint();
 
-            if (HasLeadingZeros()) {
-                RemoveLeadingZeros();
+            if (!IsInputValidForSubtraction(n2)) {
+                throw new Exception("Underflow error.");
             }
-
+            
             for (int i = 0; i < split_number.Count; i++) {
-                tempString = $"{tempString}{split_number[i]}";
+                temp.split_number.Add(split_number[i] - n2.split_number[i]);
             }
 
-            char[] charArray = tempString.ToCharArray();
-            string output = string.Empty;
-            for (int i = charArray.Length - 1; i > -1; i--) {
-                output += charArray[i];
-            }
-            return output;
+            temp.Clean();
+
+            return temp;
         }
 
         /// <summary>
@@ -188,6 +204,19 @@ namespace SharpNumbers {
                     break;
                 }
             }
+        }
+
+        private bool IsInputValidForSubtraction(usuperint input) {
+            if (input.split_number.Count == split_number.Count) {
+                for (int i = split_number.Count - 1; i >= 0 ; i--) {
+                    if (split_number[i] < input.split_number[i]) {
+                        return false;
+                    }
+                }
+            } else if (input.split_number.Count  > split_number.Count) {
+                return false;
+            }
+            return true;
         }
     }
 }

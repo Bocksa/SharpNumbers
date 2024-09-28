@@ -12,12 +12,10 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            uint k = 4;
-            k.ToString();
             usuperint foo = new usuperint(699);
             usuperint bar = new usuperint(420);
 
-            foo = foo.Add(bar);
+            foo = bar.Sub(foo);
 
             Console.WriteLine(foo.ToString());
             Console.ReadKey();
