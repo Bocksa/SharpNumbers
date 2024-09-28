@@ -118,6 +118,22 @@ namespace SharpNumbers {
             return temp;
         }
 
+        public usuperint Mult(usuperint n2) {
+            usuperint temp = new usuperint();
+
+            temp.Clean();
+
+            return temp;
+        }
+
+        public usuperint Div(usuperint n2) {
+            usuperint temp = new usuperint();
+
+            temp.Clean();
+            
+            return temp;
+        }
+
         /// <summary>
         /// Loops through a string from last to first character and inserts the characters as integers into a list.
         /// </summary>
@@ -139,9 +155,9 @@ namespace SharpNumbers {
             for (int i = 0; i < split_number.Count  ; i++) {
                 int currentEntry = split_number[i];
                 if (currentEntry < 0) {
-                    DecrementIndex(currentEntry, i);
+                    BorrowFromHigherIndex(currentEntry, i);
                 } else if (currentEntry > 9) {
-                    IncrementIndex(currentEntry, i);
+                    PassToHigherIndex(currentEntry, i);
                 }
             }
             if (!IsFormattedCorrectly()) {
@@ -157,7 +173,7 @@ namespace SharpNumbers {
         /// </summary>
         /// <param name="currentEntry"></param>
         /// <param name="i"></param>
-        private void IncrementIndex(int currentEntry, int i) {
+        private void PassToHigherIndex(int currentEntry, int i) {
             int upperNumber = currentEntry / 10;
             if (split_number.Count - 1 > i) {
                 int upperEntry = split_number[i + 1];
@@ -174,11 +190,9 @@ namespace SharpNumbers {
         /// </summary>
         /// <param name="currentEntry"></param>
         /// <param name="i"></param>
-        private void DecrementIndex(int currentEntry, int i) {
-            int lowerEntry = split_number[i - 1];
-            int subNumber = 10 - currentEntry;
-            split_number[i] = 0;
-            split_number[i - 1] = lowerEntry - subNumber;
+        private void BorrowFromHigherIndex(int currentEntry, int i) {
+            split_number[i] = 10 + currentEntry;
+            split_number[i + 1] = split_number[i + 1] - 1;
         }
 
         /// <summary>
