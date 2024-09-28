@@ -71,7 +71,7 @@ namespace SharpNumbers {
         /// Converts the numeric value of this instance to its equivalent string representation.
         /// </summary>
         /// <returns></returns>
-        public string ToString() {
+        public override string ToString() {
             string tempString = string.Empty;
 
             if (HasLeadingZeros()) {
