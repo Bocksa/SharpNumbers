@@ -7,16 +7,27 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     class usuperint {
         private List<int> split_number = new List<int>();
+
+        /// <summary>
+        /// Represents an infini-bit unsigned superinteger.
+        /// </summary>
+        /// <param name="number"></param>
         public usuperint(string number) {
             split_number = ConvertFromStringToIndexOrderList(number);
         }
+
+        /// <summary>
+        /// Represents an infini-bit unsigned superinteger.
+        /// </summary>
+        /// <param name="number"></param>
         public usuperint(long number) {
             split_number = ConvertFromStringToIndexOrderList(number.ToString());
         }
+
         private usuperint() {
             /*
              * This is not public because I don't see a reason why anyone might need it.
-             * This is purely used for creating temporary usuperints for math operations.
+             * This is used for creating temporary usuperints for math operations.
              */
         }
 
@@ -27,6 +38,7 @@ namespace SharpNumbers {
         /// <returns></returns>
         public usuperint Add(usuperint n2) {
             usuperint temp = new usuperint();
+            
             if (split_number.Count > n2.split_number.Count) {
                 for (int i = 0; i < split_number.Count; i++) {
                     if (i < n2.split_number.Count) {
