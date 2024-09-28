@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* 
+ * Created by Cian McNamara, 2024.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,7 +68,7 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Returns a string that represents a usuperint.
+        /// Converts the numeric value of this instance to its equivalent string representation.
         /// </summary>
         /// <returns></returns>
         public string ToString() {
@@ -152,6 +156,18 @@ namespace SharpNumbers {
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Checks if split_number has leading zeros.
+        /// </summary>
+        /// <returns></returns>
+        private bool HasLeadingZeros() {
+            if (split_number[split_number.Count - 1] == 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
