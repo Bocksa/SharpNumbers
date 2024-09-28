@@ -56,7 +56,6 @@ namespace SharpNumbers {
         /// <param name="number"></param>
         /// <returns></returns>
         private List<int> ConvertFromStringToIndexOrderList(string number) {
-
             List<int> temporaryList = new List<int>();
             for (int i = number.Length - 1; i >= 0; i--) {
                 temporaryList.Add(int.Parse(number[i].ToString()));
@@ -71,25 +70,43 @@ namespace SharpNumbers {
             for (int i = 0; i < split_number.Count  ; i++) {
                 int currentEntry = split_number[i];
                 if (currentEntry < 0) {
-                    int lowerEntry = split_number[i - 1];
-                    int subNumber = 10 - currentEntry;
-                    split_number[i] = 0;
-                    split_number[i - 1] = lowerEntry - subNumber;
+                    DecrementIndex(currentEntry, i);
                 } else if (currentEntry > 9) {
-                    int upperNumber = currentEntry / 10;
-                    if (split_number.Count - 1 > i) {
-                        int upperEntry = split_number[i + 1];
-                        split_number[i] = currentEntry % 10;
-                        split_number[i + 1] = upperEntry + upperNumber;
-                    } else {
-                        split_number[i] = currentEntry % 10;
-                        split_number.Add(upperNumber);
-                    }
+                    IncrementIndex(currentEntry, i);
                 }
             }
             if (!IsFormattedCorrectly()) {
                 Clean();
             }
+        }
+
+        /// <summary>
+        /// Increments the current index and puts the correct value into the upper index in split_number.
+        /// </summary>
+        /// <param name="currentEntry"></param>
+        /// <param name="i"></param>
+        private void IncrementIndex(int currentEntry, int i) {
+            int upperNumber = currentEntry / 10;
+            if (split_number.Count - 1 > i) {
+                int upperEntry = split_number[i + 1];
+                split_number[i] = currentEntry % 10;
+                split_number[i + 1] = upperEntry + upperNumber;
+            } else {
+                split_number[i] = currentEntry % 10;
+                split_number.Add(upperNumber);
+            }
+        }
+
+        /// <summary>
+        /// Decrements the current index and puts the correct value into the lower index in split_number.
+        /// </summary>
+        /// <param name="currentEntry"></param>
+        /// <param name="i"></param>
+        private void DecrementIndex(int currentEntry, int i) {
+            int lowerEntry = split_number[i - 1];
+            int subNumber = 10 - currentEntry;
+            split_number[i] = 0;
+            split_number[i - 1] = lowerEntry - subNumber;
         }
 
         /// <summary>
