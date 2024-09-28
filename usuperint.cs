@@ -90,11 +90,17 @@ namespace SharpNumbers {
             return temp;
         }
 
+        /// <summary>
+        /// Loops through every index of both numbers and subtracts the two corresponding index's.
+        /// </summary>
+        /// <param name="n2"></param>
+        /// <returns></returns>
+        /// <exception cref="OverflowException"></exception>
         public usuperint Sub(usuperint n2) {
             usuperint temp = new usuperint();
 
             if (!IsInputValidForSubtraction(n2)) {
-                throw new Exception("Underflow error.");
+                throw new OverflowException();
             }
             
             for (int i = 0; i < split_number.Count; i++) {

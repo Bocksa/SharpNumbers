@@ -15,7 +15,12 @@ namespace SharpNumbers {
             usuperint foo = new usuperint(699);
             usuperint bar = new usuperint(420);
 
-            foo = bar.Sub(foo);
+            foo.Add(bar);
+            foo.Sub(bar);
+            //foo.Mult(bar); TBA
+            //foo.Div(bar); TBA
+
+            foo = foo.Sub(bar);
 
             Console.WriteLine(foo.ToString());
             Console.ReadKey();
