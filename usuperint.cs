@@ -105,8 +105,8 @@ namespace SharpNumbers {
         public usuperint Sub(usuperint n2) {
             usuperint temp = new usuperint();
 
-            if (!IsInputValidForSubtraction(n2)) {
-                throw new OverflowException();
+            if (this < n2) {
+                throw new ArgumentException($"LHS is less than RHS", nameof(n2));
             }
             
             for (int i = 0; i < split_number.Count; i++) {
@@ -133,7 +133,6 @@ namespace SharpNumbers {
             if (split_number.Count >= n2.split_number.Count) {
                 for (int offset = 0; offset < split_number.Count; offset++) {
                     usuperint subtemp = new usuperint();
-                    subtemp.split_number.DefaultIfEmpty(0);
 
                     for (int i = 0; i < n2.split_number.Count; i++) {
                         int selection_a = split_number[offset];
@@ -142,7 +141,7 @@ namespace SharpNumbers {
                     }
 
                     subtemp.Clean();
-                    temp = temp.Add(subtemp);
+                    temp = temp + subtemp;
                 }
             } else {
                 for (int offset = 0; offset < n2.split_number.Count; offset++) {
@@ -156,7 +155,7 @@ namespace SharpNumbers {
                     }
 
                     subtemp.Clean();
-                    temp = temp.Add(subtemp);
+                    temp = temp + subtemp;
                 }
             }
 
@@ -174,18 +173,33 @@ namespace SharpNumbers {
             usuperint temp = this;
             usuperint counter = new usuperint(0);
 
-            while (temp.IsGreaterThan(n2)) {
-                counter = counter.Add(new usuperint(1));
-                if (counter.IsEqualTo(new usuperint(0))) {
-                    temp = Sub(n2);
+            if (this == 0 && n2 == 0) {
+                throw new DivideByZeroException();
+            }
+
+            while (temp < n2) {
+                counter = counter++;
+                if (counter == 1) {
+                    temp = this - n2;
                     temp.Clean();
                 } else {
-                    temp = temp.Sub(n2);
+                    temp = temp - n2;
                     temp.Clean();
                 }
             }
             
             return counter;
+        }
+
+        public usuperint Mod(usuperint n2) {
+            usuperint temp = this;
+
+            while (temp > n2) {
+                temp = temp - n2;
+                temp.Clean();
+            }
+
+            return temp;
         }
 
         /// <summary>
@@ -352,15 +366,6 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Checks if the input usuperint is greater than the current usuperint.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        private bool IsInputValidForSubtraction(usuperint input) {
-            return IsGreaterThan(input);
-        }
-
-        /// <summary>
         /// Inserts a given input to a potentially out of range location in a list.
         /// </summary>
         /// <param name="location"></param>
@@ -373,6 +378,62 @@ namespace SharpNumbers {
                 split_number.Add(input);
             } else {
                 split_number[location] = input;
+            }
+        }
+
+        /* Below are all the operator overloads */
+
+        public static implicit operator usuperint(int number) {
+            return new usuperint(number);
+        }
+        public static implicit operator usuperint(string number) {
+            return new usuperint(number);
+        }
+        public static usuperint operator +(usuperint lhs, usuperint rhs) {
+            return lhs.Add(rhs);
+        }
+        public static usuperint operator -(usuperint lhs, usuperint rhs) {
+            return lhs.Sub(rhs);
+        }
+        public static usuperint operator *(usuperint lhs, usuperint rhs) {
+            return lhs.Mult(rhs);
+        }
+        public static usuperint operator /(usuperint lhs, usuperint rhs) {
+            return lhs.Div(rhs);
+        }
+        public static usuperint operator %(usuperint lhs, usuperint rhs) {
+            return lhs.Mod(rhs);
+        }
+        public static usuperint operator ++(usuperint number) {
+            return number + new usuperint(1);
+        }
+        public static usuperint operator --(usuperint number) {
+            return number - new usuperint(1);
+        }
+        public static bool operator ==(usuperint lhs, usuperint rhs) {
+            return lhs.IsEqualTo(rhs);
+        }
+        public static bool operator !=(usuperint lhs, usuperint rhs) {
+            return !lhs.IsEqualTo(rhs);
+        }
+        public static bool operator >(usuperint lhs, usuperint rhs) {
+            return lhs.IsGreaterThan(rhs);
+        }
+        public static bool operator <(usuperint lhs, usuperint rhs) {
+            return lhs.IsLessThan(rhs);
+        }
+        public static bool operator >=(usuperint lhs, usuperint rhs) {
+            if (lhs > rhs || lhs == rhs) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        public static bool operator <=(usuperint lhs, usuperint rhs) {
+            if (lhs < rhs || lhs == rhs) {
+                return true;
+            } else {
+                return false;
             }
         }
     }

@@ -12,21 +12,25 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            usuperint foo = new usuperint("420");
-            usuperint bar = new usuperint("69");
+            int n1 = 7;
+            int n2 = 3;
 
-            int Case = 420 / 69;
+            usuperint foo = n1;
+            usuperint bar = n2;
+
+            int Case = n1 % n2;
 
             /* 
              *  Test Cases are located below. (who needs proper unit testing anyway)
              */
 
-            //foo.Add(bar);
-            //foo.Sub(bar);
-            //foo.Mult(bar);
-            //foo.Div(bar);
+            if (foo > bar) {
+                Console.WriteLine($"{foo} > {bar}");
+            } else {
+                Console.WriteLine($"{foo} < {bar}");
+            }
 
-            foo = foo.Div(bar);
+            foo = foo % bar;
 
             Console.WriteLine($"Is {foo} correct? {foo.ToString() == Case.ToString()}");
             Console.ReadKey();
