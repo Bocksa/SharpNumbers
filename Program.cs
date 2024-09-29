@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            long n1 = long.MaxValue;
-            long n2 = int.MaxValue;
+            int n1 = 70;
+            int n2 = 3;
 
             usuperint foo = n1;
             usuperint bar = n2;
@@ -30,7 +30,7 @@ namespace SharpNumbers {
                 Console.WriteLine($"{foo} != {bar}");
             }
 
-            Console.WriteLine($"{foo} / {bar} = {foo / bar} // Verified: {long.MaxValue / int.MaxValue}");
+            Console.WriteLine($"{foo} / {bar} = {foo / bar} // Verified: {n1 / n2}");
             Console.ReadKey();
         }
     }

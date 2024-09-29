@@ -178,10 +178,8 @@ namespace SharpNumbers {
                 counter++;
                 if (counter == 1) {
                     temp = this - n2;
-                    temp.Clean();
                 } else {
                     temp = temp - n2;
-                    temp.Clean();
                 }
             }
             
@@ -198,9 +196,9 @@ namespace SharpNumbers {
 
             while (temp > n2) {
                 temp = temp - n2;
-                temp.Clean();
             }
 
+            temp.Clean();
             return temp;
         }
 
