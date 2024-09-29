@@ -122,7 +122,11 @@ namespace SharpNumbers {
             return temp;
         }
 
-
+        /// <summary>
+        /// Multiplies two usuperints.
+        /// </summary>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public usuperint Mult(usuperint n2) {
             usuperint temp = new usuperint();
 
@@ -161,6 +165,11 @@ namespace SharpNumbers {
             return temp;
         }
 
+        /// <summary>
+        /// Divides two usuperints.
+        /// </summary>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public usuperint Div(usuperint n2) {
             usuperint temp = this;
             usuperint counter = new usuperint(0);
@@ -179,6 +188,11 @@ namespace SharpNumbers {
             return counter;
         }
 
+        /// <summary>
+        /// Checks if the current usuperint is greater than the input usuperint.
+        /// </summary>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public bool IsGreaterThan(usuperint n2) {
             if (n2.split_number.Count == split_number.Count) {
                 for (int i = split_number.Count - 1; i >= 0; i--) {
@@ -196,6 +210,11 @@ namespace SharpNumbers {
             }
         }
 
+        /// <summary>
+        /// Checks if the current usuperint is less than the input usuperint.
+        /// </summary>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public bool IsLessThan(usuperint n2) {
             if (n2.split_number.Count == split_number.Count) {
                 for (int i = split_number.Count - 1; i >= 0; i--) {
@@ -211,6 +230,11 @@ namespace SharpNumbers {
             }
         }
 
+        /// <summary>
+        /// Checks if both usuperints are equal.
+        /// </summary>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public bool IsEqualTo(usuperint n2) {
             if (n2.split_number.Count == split_number.Count) {
                 for (int i = 0; i < split_number.Count; i++) {

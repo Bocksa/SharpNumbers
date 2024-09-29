@@ -28,7 +28,7 @@ namespace SharpNumbers {
 
             foo = foo.Div(bar);
 
-            Console.WriteLine($"Is {foo.ToString()} correct? {foo.ToString() == Case.ToString()}");
+            Console.WriteLine($"Is {foo} correct? {foo.ToString() == Case.ToString()}");
             Console.ReadKey();
         }
     }
