@@ -177,7 +177,7 @@ namespace SharpNumbers {
                 throw new DivideByZeroException();
             }
 
-            while (temp > n2) {
+            while (temp >= n2) {
                 counter++;
                 if (counter == 1) {
                     temp = this - n2;
@@ -345,6 +345,10 @@ namespace SharpNumbers {
         /// </summary>
         /// <returns></returns>
         private bool HasLeadingZeros() {
+            if (split_number.Count == 0) {
+                return false; 
+            }
+
             if (split_number[split_number.Count - 1] == 0) {
                 return true;
             } else {
@@ -356,7 +360,7 @@ namespace SharpNumbers {
         /// Removes the leading zeros in split_number.
         /// </summary>
         private void RemoveLeadingZeros() {
-            for (int i = split_number.Count - 1; i >= 0 ; i--) {
+            for (int i = split_number.Count - 1; i > 0 ; i--) {
                 if (split_number[i] == 0) {
                     split_number.RemoveAt(i);
                 } else {
