@@ -170,7 +170,7 @@ namespace SharpNumbers {
             usuperint temp = this;
             usuperint counter = 0;
 
-            if (this == 0 && n2 == 0) {
+            if (n2 == 0) {
                 throw new DivideByZeroException();
             }
 
