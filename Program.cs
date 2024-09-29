@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            usuperint foo = new usuperint("69");
-            usuperint bar = new usuperint("420");
+            usuperint foo = new usuperint("420");
+            usuperint bar = new usuperint("69");
 
-            int Case = 420 * 69;
+            int Case = 420 / 69;
 
             /* 
              *  Test Cases are located below. (who needs proper unit testing anyway)
@@ -26,7 +26,7 @@ namespace SharpNumbers {
             //foo.Mult(bar);
             //foo.Div(bar);
 
-            foo = foo.Mult(bar);
+            foo = foo.Div(bar);
 
             Console.WriteLine($"Is {foo.ToString()} correct? {foo.ToString() == Case.ToString()}");
             Console.ReadKey();

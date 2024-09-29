@@ -58,6 +58,10 @@ namespace SharpNumbers {
                 output = output + charArray[i];
             }
 
+            if (output ==  string.Empty) {
+                output = "0";
+            }
+
             return output;
         }
 
@@ -158,11 +162,67 @@ namespace SharpNumbers {
         }
 
         public usuperint Div(usuperint n2) {
-            usuperint temp = new usuperint();
+            usuperint temp = this;
+            usuperint counter = new usuperint(0);
 
-            temp.Clean();
+            while (temp.IsGreaterThan(n2)) {
+                counter = counter.Add(new usuperint(1));
+                if (counter.IsEqualTo(new usuperint(0))) {
+                    temp = Sub(n2);
+                    temp.Clean();
+                } else {
+                    temp = temp.Sub(n2);
+                    temp.Clean();
+                }
+            }
             
-            return temp;
+            return counter;
+        }
+
+        public bool IsGreaterThan(usuperint n2) {
+            if (n2.split_number.Count == split_number.Count) {
+                for (int i = split_number.Count - 1; i >= 0; i--) {
+                    if (split_number[i] > n2.split_number[i]) {
+                        break;
+                    } else {
+                        return false;
+                    }
+                }
+                return true;
+            } else if (n2.split_number.Count < split_number.Count) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public bool IsLessThan(usuperint n2) {
+            if (n2.split_number.Count == split_number.Count) {
+                for (int i = split_number.Count - 1; i >= 0; i--) {
+                    if (split_number[i] < n2.split_number[i]) {
+                        return true;
+                    }
+                }
+                return false;
+            } else if (n2.split_number.Count < split_number.Count) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        public bool IsEqualTo(usuperint n2) {
+            if (n2.split_number.Count == split_number.Count) {
+                for (int i = 0; i < split_number.Count; i++) {
+                    if (split_number[i] != n2.split_number[i]) {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -273,17 +333,7 @@ namespace SharpNumbers {
         /// <param name="input"></param>
         /// <returns></returns>
         private bool IsInputValidForSubtraction(usuperint input) {
-            if (input.split_number.Count == split_number.Count) {
-                for (int i = split_number.Count - 1; i >= 0 ; i--) {
-                    if (split_number[i] < input.split_number[i]) {
-                        return false;
-                    }
-                }
-            } else if (input.split_number.Count  > split_number.Count) {
-                return false;
-            }
-
-            return true;
+            return IsGreaterThan(input);
         }
 
         /// <summary>
