@@ -101,7 +101,7 @@ namespace SharpNumbers {
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
-        /// <exception cref="OverflowException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public usuperint Sub(usuperint n2) {
             usuperint temp = new usuperint();
 
@@ -171,14 +171,14 @@ namespace SharpNumbers {
         /// <returns></returns>
         public usuperint Div(usuperint n2) {
             usuperint temp = this;
-            usuperint counter = new usuperint(0);
+            usuperint counter = 0;
 
             if (this == 0 && n2 == 0) {
                 throw new DivideByZeroException();
             }
 
-            while (temp < n2) {
-                counter = counter++;
+            while (temp > n2) {
+                counter++;
                 if (counter == 1) {
                     temp = this - n2;
                     temp.Clean();
@@ -405,10 +405,10 @@ namespace SharpNumbers {
             return lhs.Mod(rhs);
         }
         public static usuperint operator ++(usuperint number) {
-            return number + new usuperint(1);
+            return number + 1;
         }
         public static usuperint operator --(usuperint number) {
-            return number - new usuperint(1);
+            return number - 1;
         }
         public static bool operator ==(usuperint lhs, usuperint rhs) {
             return lhs.IsEqualTo(rhs);

@@ -18,7 +18,7 @@ namespace SharpNumbers {
             usuperint foo = n1;
             usuperint bar = n2;
 
-            int Case = n1 % n2;
+            int Case = n1 / n2;
 
             /* 
              *  Test Cases are located below. (who needs proper unit testing anyway)
@@ -30,7 +30,7 @@ namespace SharpNumbers {
                 Console.WriteLine($"{foo} < {bar}");
             }
 
-            foo = foo % bar;
+            foo = foo / bar;
 
             Console.WriteLine($"Is {foo} correct? {foo.ToString() == Case.ToString()}");
             Console.ReadKey();
