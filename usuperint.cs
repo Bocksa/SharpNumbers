@@ -5,9 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SharpNumbers {
     class usuperint {
@@ -191,6 +188,11 @@ namespace SharpNumbers {
             return counter;
         }
 
+        /// <summary>
+        /// Returns the modulo of two usuperints.
+        /// </summary>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public usuperint Mod(usuperint n2) {
             usuperint temp = this;
 
@@ -387,6 +389,9 @@ namespace SharpNumbers {
 
         /* Below are all the operator overloads */
 
+        public static implicit operator usuperint(long number) {
+            return new usuperint(number);
+        }
         public static implicit operator usuperint(int number) {
             return new usuperint(number);
         }
