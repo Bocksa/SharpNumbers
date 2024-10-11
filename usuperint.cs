@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace SharpNumbers {
     class usuperint {
@@ -103,7 +104,7 @@ namespace SharpNumbers {
             usuperint temp = new usuperint();
 
             if (this < n2) {
-                throw new ArgumentException($"LHS is less than RHS", nameof(n2));
+                //throw new ArgumentException($"LHS is less than RHS", nameof(n2));
             }
             
             for (int i = 0; i < split_number.Count; i++) {
@@ -186,6 +187,27 @@ namespace SharpNumbers {
             return counter;
         }
 
+        public usuperint FastDiv(usuperint n2) {
+            usuperint temp = this;
+            usuperint counter = 0;
+            usuperint prediction = n2;
+
+            while ((prediction + n2) * n2 < temp) {
+                prediction = prediction + n2;
+            }
+
+            counter = prediction;
+            var digV = prediction * n2;
+            temp = this - digV;
+
+            while (temp >= n2) {
+                counter++;
+                temp = temp - n2;
+            }
+
+            return counter;
+        }
+
         /// <summary>
         /// Returns the modulo of two usuperints.
         /// </summary>
@@ -199,6 +221,48 @@ namespace SharpNumbers {
             }
 
             temp.Clean();
+            return temp;
+        }
+
+        /// <summary>
+        /// Conducts a leftward (additive) decimal shift.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public usuperint ShiftLeft(uint n) {
+            usuperint temp = new usuperint();
+            temp.split_number = split_number;
+
+            for (int i = temp.split_number.Count - 1; i >= 0; i--) {
+                try {
+                    int currentEntry = temp.split_number[i];
+                    InsertAtLocation((int)(i + n), currentEntry);
+                    temp.split_number[i] = 0;
+                } catch (Exception e) {
+                    throw (e);
+                }
+            }
+
+            return temp;
+        }
+
+        /// <summary>
+        /// Conducts a rightward (subtractive) decimal shift.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public usuperint ShiftRight(uint n) {
+            usuperint temp = new usuperint();
+            temp.split_number = split_number;
+
+
+            for (int i = 0; i < temp.split_number.Count; i++) {
+                try {
+                    temp.split_number[(int)(i - n)] = temp.split_number[i];
+                    temp.split_number[i] = 0;
+                } catch { }
+            }
+
             return temp;
         }
 
@@ -417,6 +481,12 @@ namespace SharpNumbers {
         public static usuperint operator --(usuperint number) {
             return number - 1;
         }
+        /*public static usuperint operator >>(usuperint lhs, uint rhs) {
+            return lhs.ShiftRight(rhs);
+        }
+        public static usuperint operator <<(usuperint lhs, uint rhs) {
+            return lhs.ShiftLeft(rhs);
+        }*/
         public static bool operator ==(usuperint lhs, usuperint rhs) {
             return lhs.IsEqualTo(rhs);
         }

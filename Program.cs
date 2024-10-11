@@ -12,17 +12,18 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     internal class Program {
         static void Main(string[] args) {
-            int n1 = 70;
-            int n2 = 3;
+            long n1 = 5992269695472;
+            long n2 = 1011;
 
             usuperint foo = n1;
             usuperint bar = n2;
 
-            //int Case = n1 * n2;
-
             /* 
              *  Test Cases are located below. (who needs proper unit testing anyway)
              */
+
+            var x = bar.ShiftRight(2);
+            var y = bar.ShiftLeft(2);
 
             if (foo == bar) {
                 Console.WriteLine($"{foo} = {bar}");
@@ -30,7 +31,7 @@ namespace SharpNumbers {
                 Console.WriteLine($"{foo} != {bar}");
             }
 
-            Console.WriteLine($"{foo} / {bar} = {foo / bar} // Verified: {n1 / n2}");
+            Console.WriteLine($"{foo} / {bar} = {foo.FastDiv(bar)} // Verified: {n1 / n2}");
             Console.ReadKey();
         }
     }
