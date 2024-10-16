@@ -104,7 +104,7 @@ namespace SharpNumbers {
             usuperint temp = new usuperint();
 
             if (this < n2) {
-                //throw new ArgumentException($"LHS is less than RHS", nameof(n2));
+                throw new ArgumentException($"LHS is less than RHS", nameof(n2));
             }
             
             for (int i = 0; i < split_number.Count; i++) {
@@ -229,9 +229,13 @@ namespace SharpNumbers {
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        public usuperint ShiftLeft(uint n) {
+        public usuperint ShiftLeft(long n) {
             usuperint temp = new usuperint();
             temp.split_number = split_number;
+
+            if (n < 0) {
+                ShiftRight(n * -1);
+            }
 
             for (int i = temp.split_number.Count - 1; i >= 0; i--) {
                 try {
@@ -251,10 +255,13 @@ namespace SharpNumbers {
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        public usuperint ShiftRight(uint n) {
+        public usuperint ShiftRight(long n) {
             usuperint temp = new usuperint();
             temp.split_number = split_number;
 
+            if (n < 0) {
+                ShiftLeft(n * -1);
+            }
 
             for (int i = 0; i < temp.split_number.Count; i++) {
                 try {
