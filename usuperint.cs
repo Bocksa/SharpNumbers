@@ -26,6 +26,14 @@ namespace SharpNumbers {
             split_number = ConvertFromStringToIndexOrderList(number.ToString());
         }
 
+        public usuperint (superint number) {
+            string convertedNumber = number.ToString();
+            if (number.IsNegative) {
+                convertedNumber = convertedNumber.TrimStart('-');
+            }
+            split_number = ConvertFromStringToIndexOrderList(convertedNumber);
+        }
+
         /// <summary>
         /// Represents an infini-bit unsigned superinteger.
         /// </summary>

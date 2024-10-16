@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SharpNumbers {
     public class superint {
         private List<int> split_number = new List<int>();
-        private bool IsNegative { get; set; }
+        public bool IsNegative { get; set; }
 
         /// <summary>
         /// Represents an infini-bit signed superinteger.
@@ -86,22 +86,22 @@ namespace SharpNumbers {
         /// <returns></returns>
         public superint Add(superint n2) {
             superint temp = new superint();
+            usuperint convertedThis = new usuperint(this);
+            usuperint convertedN2 = new usuperint(n2);
 
-            if (split_number.Count > n2.split_number.Count) {
-                for (int i = 0; i < split_number.Count; i++) {
-                    if (i < n2.split_number.Count) {
-                        temp.split_number.Add(n2.split_number[i] + split_number[i]);
-                    } else {
-                        temp.split_number.Add(split_number[i]);
-                    }
-                }
+            if (this.IsNegative && n2.IsNegative) {
+                temp = new superint(convertedThis + convertedN2);
+                temp.IsNegative = true;
+            } else if (!this.IsNegative && !n2.IsNegative) {
+                temp = new superint(convertedThis + convertedN2);
+                temp.IsNegative = false;
             } else {
-                for (int i = 0; i < n2.split_number.Count; i++) {
-                    if (i < split_number.Count) {
-                        temp.split_number.Add(n2.split_number[i] + split_number[i]);
-                    } else {
-                        temp.split_number.Add(n2.split_number[i]);
-                    }
+                if (convertedN2 > convertedThis && n2.IsNegative) {
+                    temp = new superint(convertedN2 - convertedThis);
+                    temp.IsNegative = true;
+                } else {
+                    temp = new superint(convertedThis - convertedN2);
+                    temp.IsNegative = true;
                 }
             }
 
