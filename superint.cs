@@ -99,6 +99,12 @@ namespace SharpNumbers {
                 if (convertedN2 > convertedThis && n2.IsNegative) {
                     temp = new superint(convertedN2 - convertedThis);
                     temp.IsNegative = true;
+                } else if (convertedN2 > convertedThis && !n2.IsNegative) {
+                    temp = new superint(convertedN2 - convertedThis);
+                    temp.IsNegative = false;
+                } else if (convertedThis > convertedN2 && n2.IsNegative) {
+                    temp = new superint(convertedThis - convertedN2);
+                    temp.IsNegative = false;
                 } else {
                     temp = new superint(convertedThis - convertedN2);
                     temp.IsNegative = true;

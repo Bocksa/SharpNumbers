@@ -14,6 +14,7 @@ namespace SharpNumbers {
             superint foo = n1;
             superint bar = n2;
             superint result = foo + bar;
+
             /* 
              *  Test Cases are located below. (who needs proper unit testing anyway)
              */
@@ -24,7 +25,7 @@ namespace SharpNumbers {
                 Console.WriteLine($"{foo} != {bar}");
             }
 
-           Console.WriteLine($"{foo} + {bar} = {result} // Verified: {n1 * n2}");
+           Console.WriteLine($"{foo} + {bar} = {result} // Verified: {n1 + n2}");
             Console.ReadKey();
         }
     }
