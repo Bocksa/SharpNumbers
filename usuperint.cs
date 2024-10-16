@@ -5,10 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace SharpNumbers {
-    class usuperint {
+    public class usuperint {
         private List<int> split_number = new List<int>();
 
         /// <summary>
@@ -27,10 +26,17 @@ namespace SharpNumbers {
             split_number = ConvertFromStringToIndexOrderList(number.ToString());
         }
 
-        private usuperint() {
+        /// <summary>
+        /// Represents an infini-bit unsigned superinteger.
+        /// </summary>
+        public usuperint() {
             /*
              * This is not public because I don't see a reason why anyone might need it.
              * This is used for creating temporary usuperints for math operations.
+             */
+
+            /*
+             * Nvm its now public, everything broke when changing to public class.
              */
         }
 
