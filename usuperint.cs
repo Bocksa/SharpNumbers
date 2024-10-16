@@ -187,27 +187,6 @@ namespace SharpNumbers {
             return counter;
         }
 
-        public usuperint FastDiv(usuperint n2) {
-            usuperint temp = this;
-            usuperint counter = 0;
-            usuperint prediction = n2;
-
-            while ((prediction + n2) * n2 < temp) {
-                prediction = prediction + n2;
-            }
-
-            counter = prediction;
-            var digV = prediction * n2;
-            temp = this - digV;
-
-            while (temp >= n2) {
-                counter++;
-                temp = temp - n2;
-            }
-
-            return counter;
-        }
-
         /// <summary>
         /// Returns the modulo of two usuperints.
         /// </summary>
