@@ -80,7 +80,7 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Adds two usuperints together.
+        /// Adds two superints together.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
@@ -117,33 +117,18 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Subtracts two usuperints from eachother.
+        /// Subtracts two superints from eachother.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
         public superint Sub(superint n2) {
-            superint temp = new superint();
+            n2.IsNegative = !n2.IsNegative;
 
-            if (this < n2) {
-                throw new ArgumentException($"LHS is less than RHS", nameof(n2));
-            }
-
-            for (int i = 0; i < split_number.Count; i++) {
-                if (i < n2.split_number.Count) {
-                    temp.split_number.Add(split_number[i] - n2.split_number[i]);
-                } else {
-                    temp.split_number.Add(split_number[i]);
-                }
-            }
-
-            temp.Clean();
-
-            return temp;
+            return this.Add(n2);
         }
 
         /// <summary>
-        /// Multiplies two usuperints.
+        /// Multiplies two superints.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
@@ -193,7 +178,7 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Divides two usuperints.
+        /// Divides two superints.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
@@ -230,7 +215,7 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Returns the modulo of two usuperints.
+        /// Returns the modulo of two superints.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
@@ -295,64 +280,69 @@ namespace SharpNumbers {
         }
 
         /// <summary>
-        /// Checks if the current usuperint is greater than the input usuperint.
+        /// Checks if the current superint is greater than the input superint.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
         public bool IsGreaterThan(superint n2) {
-            if (n2.split_number.Count == split_number.Count) {
-                for (int i = split_number.Count - 1; i >= 0; i--) {
-                    if (split_number[i] > n2.split_number[i]) {
-                        break;
-                    } else {
-                        return false;
-                    }
-                }
+            if (n2.IsNegative && !this.IsNegative) {
                 return true;
-            } else if (n2.split_number.Count < split_number.Count) {
-                return true;
-            } else {
+            } else if (this.IsNegative && !n2.IsNegative) {
                 return false;
+            } if (this.IsNegative && n2.IsNegative) {
+                usuperint n_1 = new usuperint(this);
+                usuperint n_2 = new usuperint(n2);
+                return n_1 < n_2;
+            } else {
+                usuperint n_1 = new usuperint(this);
+                usuperint n_2 = new usuperint(n2);
+                return n_1 > n_2;
             }
         }
 
         /// <summary>
-        /// Checks if the current usuperint is less than the input usuperint.
+        /// Checks if the current superint is less than the input superint.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
         public bool IsLessThan(superint n2) {
-            if (n2.split_number.Count == split_number.Count) {
-                for (int i = split_number.Count - 1; i >= 0; i--) {
-                    if (split_number[i] < n2.split_number[i]) {
-                        return true;
-                    }
-                }
+            if (n2.IsNegative && !this.IsNegative) {
                 return false;
-            } else if (n2.split_number.Count < split_number.Count) {
-                return false;
-            } else {
+            } else if (this.IsNegative && !n2.IsNegative) {
                 return true;
+            }
+            if (this.IsNegative && n2.IsNegative) {
+                usuperint n_1 = new usuperint(this);
+                usuperint n_2 = new usuperint(n2);
+                return n_1 > n_2;
+            } else {
+                usuperint n_1 = new usuperint(this);
+                usuperint n_2 = new usuperint(n2);
+                return n_1 < n_2;
             }
         }
 
         /// <summary>
-        /// Checks if both usuperints are equal.
+        /// Checks if both superints are equal.
         /// </summary>
         /// <param name="n2"></param>
         /// <returns></returns>
         public bool IsEqualTo(superint n2) {
-            if (n2.split_number.Count == split_number.Count) {
-                for (int i = 0; i < split_number.Count; i++) {
-                    if (split_number[i] != n2.split_number[i]) {
-                        return false;
-                    }
-                }
-            } else {
+            if (n2.IsNegative && !this.IsNegative || this.IsNegative && !n2.IsNegative) {
                 return false;
-            }
+            } else {
+                if (n2.split_number.Count == split_number.Count) {
+                    for (int i = 0; i < split_number.Count; i++) {
+                        if (split_number[i] != n2.split_number[i]) {
+                            return false;
+                        }
+                    }
+                } else {
+                    return false;
+                }
 
-            return true;
+                return true;
+            }
         }
 
         /// <summary>
