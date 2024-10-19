@@ -26,6 +26,10 @@ namespace SharpNumbers {
             split_number = ConvertFromStringToIndexOrderList(number.ToString());
         }
 
+        /// <summary>
+        /// Represents an infini-bit unsigned superinteger.
+        /// </summary>
+        /// <param name="number"></param>
         public usuperint (superint number) {
             string convertedNumber = number.ToString();
             if (number.IsNegative) {
@@ -270,11 +274,34 @@ namespace SharpNumbers {
             return temp;
         }
 
-        public usuperint Log_10(usuperint n) {
+        /// <summary>
+        /// Conducts a base 10 log operation on the input number.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static usuperint Log_10(usuperint n) {
             int counter = 0;
 
             while (n >= 10) {
                 n = n.ShiftRight(1);
+                counter++;
+            }
+
+            return counter;
+        }
+
+
+        /// <summary>
+        /// Conducts a base 10 log operation on the object.
+        /// </summary>
+        /// <returns></returns>
+        public usuperint Log_10() {
+            usuperint temp = new usuperint();
+            temp.split_number = split_number;
+            int counter = 0;
+
+            while (temp >= 10) {
+                temp = temp.ShiftRight(1);
                 counter++;
             }
 

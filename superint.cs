@@ -1,8 +1,10 @@
-﻿using System;
+﻿/* 
+ * Created by Cian McNamara, 2024.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpNumbers {
     public class superint {
@@ -279,7 +281,7 @@ namespace SharpNumbers {
             return temp;
         }
 
-        public superint Log_10(superint n) {
+        public static superint Log_10(superint n) {
             int counter = 0;
 
             if (n.IsNegative) {
@@ -288,6 +290,27 @@ namespace SharpNumbers {
 
             while (n >= 10) {
                 n = n.ShiftRight(1);
+                counter++;
+            }
+
+            return counter;
+        }
+
+        /// <summary>
+        /// Conducts a base 10 log operation on the object.
+        /// </summary>
+        /// <returns></returns>
+        public superint Log_10() {
+            superint temp = new superint();
+            temp.split_number = split_number;
+            int counter = 0;
+
+            if (this.IsNegative) {
+                throw new ArgumentException($"Number greater than 0 expected, {this} was given.");
+            }
+
+            while (temp >= 10) {
+                temp = temp.ShiftRight(1);
                 counter++;
             }
 

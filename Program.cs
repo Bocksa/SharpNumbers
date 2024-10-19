@@ -13,6 +13,7 @@ namespace SharpNumbers {
 
             usuperint foo = n1;
             usuperint bar = n2;
+            usuperfloat baz = new usuperfloat(1.34);
             usuperint result = foo * bar;
 
             /* 
