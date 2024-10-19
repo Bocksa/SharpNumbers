@@ -279,6 +279,21 @@ namespace SharpNumbers {
             return temp;
         }
 
+        public superint Log_10(superint n) {
+            int counter = 0;
+
+            if (n.IsNegative) {
+                throw new ArgumentException($"Number greater than 0 expected, {n} was given.");
+            }
+
+            while (n >= 10) {
+                n = n.ShiftRight(1);
+                counter++;
+            }
+
+            return counter;
+        }
+
         /// <summary>
         /// Checks if the current superint is greater than the input superint.
         /// </summary>

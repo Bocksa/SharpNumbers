@@ -224,7 +224,7 @@ namespace SharpNumbers {
         /// <returns></returns>
         public usuperint ShiftLeft(long n) {
             usuperint temp = new usuperint();
-            temp.split_number = split_number;
+            temp = this;
 
             if (n < 0) {
                 ShiftRight(n * -1);
@@ -256,6 +256,10 @@ namespace SharpNumbers {
                 ShiftLeft(n * -1);
             }
 
+            if (this < 10) {
+                return 0;
+            }
+
             for (int i = 0; i < temp.split_number.Count; i++) {
                 try {
                     temp.split_number[(int)(i - n)] = temp.split_number[i];
@@ -266,12 +270,23 @@ namespace SharpNumbers {
             return temp;
         }
 
-        /// <summary>
-        /// Checks if the current usuperint is greater than the input usuperint.
-        /// </summary>
-        /// <param name="n2"></param>
-        /// <returns></returns>
-        public bool IsGreaterThan(usuperint n2) {
+        public usuperint Log_10(usuperint n) {
+            int counter = 0;
+
+            while (n >= 10) {
+                n = n.ShiftRight(1);
+                counter++;
+            }
+
+            return counter;
+        }
+
+            /// <summary>
+            /// Checks if the current usuperint is greater than the input usuperint.
+            /// </summary>
+            /// <param name="n2"></param>
+            /// <returns></returns>
+            public bool IsGreaterThan(usuperint n2) {
             if (n2.split_number.Count == split_number.Count) {
                 for (int i = split_number.Count - 1; i >= 0; i--) {
                     if (split_number[i] > n2.split_number[i]) {

@@ -6,14 +6,14 @@
 using System;
 
 namespace SharpNumbers {
-    internal class Program {
-        static void Main(string[] args) {
-            long n1 = 72;
-            long n2 = 3;
+    public class Program {
+        public static void Main(string[] args) {
+            long n1 = 100;
+            long n2 = 72;
 
-            superint foo = n1;
-            superint bar = n2;
-            superint result = foo * bar;
+            usuperint foo = n1;
+            usuperint bar = n2;
+            usuperint result = foo * bar;
 
             /* 
              *  Test Cases are located below. (who needs proper unit testing anyway)
@@ -26,6 +26,7 @@ namespace SharpNumbers {
             }
 
            Console.WriteLine($"{foo} * {bar} = {result} // Verified: {n1 * n2}");
+
             Console.ReadKey();
         }
     }
